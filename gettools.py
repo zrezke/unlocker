@@ -30,6 +30,7 @@ import shutil
 import tarfile
 import zipfile
 import time
+import platform
 
 try:
     # For Python 3.0 and later
@@ -139,8 +140,8 @@ def main():
 		# No tools found, get em from the core tar
 		print('Tools aren\'t here... Be patient while I download and' +
 			  ' give a look into the core.vmware.fusion.tar file')
-		urlcoretar = url + lastVersion + '/core/com.vmware.fusion.zip.tar'
-			  
+		cpu_architecture = 'x86' if 'x86' in platform.machine() else 'arm'
+		urlcoretar = url + lastVersion + '/' + cpu_architecture + '/core/com.vmware.fusion.zip.tar'
 		# Get the main core file
 		try:
 			urlretrieve(urlcoretar, convertpath(dest + '/tools/com.vmware.fusion.zip.tar'), reporthook)
